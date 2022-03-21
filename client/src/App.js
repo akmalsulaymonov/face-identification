@@ -32,15 +32,15 @@ const particlesOptions = {
       bubble: {
         distance: 400,
         duration: 3,
-        opacity: 0.8,
-        size: 80,
+        opacity: 0.5,
+        size: 30,
       },
       push: {
         quantity: 4,
       },
       repulse: {
         distance: 200,
-        duration: 0.4,
+        duration: 0,
       },
     },
   },
@@ -69,9 +69,9 @@ const particlesOptions = {
     number: {
       density: {
         enable: true,
-        area: 1000,
+        area: 500,
       },
-      value: 300,
+      value: 80,
     },
     opacity: {
       value: 0.5,
@@ -149,8 +149,8 @@ class App extends Component {
     this.setState({ input: event.target.value });
   }
 
-  onPictureSubmit = () =>{
-    this.setState({ imageUrl: this.state.input });
+  onPictureSubmit = () => {
+    this.setState({imageUrl: this.state.input});
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then( response => {
@@ -175,8 +175,7 @@ class App extends Component {
           }
 
           this.displayFaceBox(this.calculateFaceLocation(response))
-      })
-      .catch( err => console.log(err) );
+      }).catch( err => console.log(err) );
   }
 
   onRouteChange = (route) => {
