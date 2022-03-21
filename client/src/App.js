@@ -177,7 +177,6 @@ class App extends Component {
           this.displayFaceBox(this.calculateFaceLocation(response))
       })
       .catch( err => console.log(err) );
-      //console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
   }
 
   onRouteChange = (route) => {
