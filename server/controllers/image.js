@@ -1,4 +1,4 @@
-const {ClarifaiStub, grpc} = require("clarifai-nodejs-grpc");
+const { ClarifaiStub, grpc } = require("clarifai-nodejs-grpc");
 const stub = ClarifaiStub.grpc();
 const metadata = new grpc.Metadata();
 metadata.set("authorization", "Key 01a3395be0d94471a174411513d505ed");
@@ -32,6 +32,7 @@ const handleApiCall = (req, res) => {
             }
     
             console.log("Predicted concepts, with confidence values:")
+            
             for (const c of response.outputs[0].data.concepts) {
                 console.log(c.name + ": " + c.value);
             }
