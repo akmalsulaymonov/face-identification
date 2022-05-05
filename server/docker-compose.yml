@@ -1,0 +1,11 @@
+version: "3.9"  # optional since v1.27.0
+
+services:
+  server-api:
+    container_name: backend
+    # image: node:18.1.0
+    build: ./
+    command: npm start
+    working_dir: /usr/src/face-identification/server
+    ports:
+      - "3001:3001"
