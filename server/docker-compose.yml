@@ -1,11 +1,30 @@
 version: "3.9"  # optional since v1.27.0
 
 services:
+
+  #Backend API
   server-api:
     container_name: backend
     # image: node:18.1.0
     build: ./
     command: npm start
     working_dir: /usr/src/face-identification/server
+    environment:
+      POSTGRES_URI: postgres://aki:secret@postgres:5432/face_db_docker
+    links:
+      - postgres
     ports:
       - "3001:3001"
+    volumes:
+      - ./:/usr/src/face-identification/server
+
+  #Postgres
+  postgres:
+    environment:
+      POSTGRES_USER: aki
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: face_db_docker
+      POSTGRES_HOST: postgres
+    build: ./postgres
+    ports:
+      - "5432:5432"

@@ -14,13 +14,21 @@ const image = require('./controllers/image');
 
 const db = knex({
     client: 'pg',
-    connection: {
+    connection: process.env.POSTGRES_URI
+    
+    /*
+    {
       host : '127.0.0.1',
       port : 5432,
       user : 'postgres',
       password : 'postgres',
       database : 'faceidbd'
-    }
+
+      host : process.env.POSTGRES_HOST,
+      user : process.env.POSTGRES_USER,
+      password : process.env.POSTGRES_PASSWORD,
+      database : process.env.POSTGRES_DB
+    }*/
 });
 
 const app = express();
