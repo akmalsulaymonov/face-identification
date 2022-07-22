@@ -15,7 +15,9 @@ const image = require('./controllers/image');
 const db = knex({
     client: 'pg',
     
+    connection: process.env.POSTGRES_URI    // -- for Docker
 
+    /*
     connection: {
       host : '127.0.0.1',
       port : 5432,
@@ -24,16 +26,7 @@ const db = knex({
       database : 'faceidbd'
     }
 
-    //connection: process.env.POSTGRES_URI     -- for Docker
-
-    /*
     {
-      host : '127.0.0.1',
-      port : 5432,
-      user : 'postgres',
-      password : 'postgres',
-      database : 'faceidbd'
-
       host : process.env.POSTGRES_HOST,
       user : process.env.POSTGRES_USER,
       password : process.env.POSTGRES_PASSWORD,
@@ -47,7 +40,7 @@ app.use(morgan('combined'));
 app.use(cors());
 
 app.get('/', (req, res) => { res.send('it is working') });
-app.post('/signin', signin.handleSignin(bcrypt, db) );
+app.post('/signin', signin.signinAuthentication(db, bcrypt) );
 app.post('/register', (req, res) => { register.handleRegister(req, res, bcrypt, db) });
 app.get('/profile/:id', (req, res) => { profile.handleProfile(req, res, db) });
 app.post('/profile/:id', (req, res) => { profile.handleProfileUpdate(req, res, db) });
